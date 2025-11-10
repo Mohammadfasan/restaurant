@@ -4,7 +4,7 @@ export interface NavItem {
   label: string;
   href: string;
   dropdown?: NavItem[];
-  description?: string; // Add this line
+  description?: string; 
 }
 
 export interface NavbarProps {

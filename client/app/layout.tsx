@@ -1,11 +1,33 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display, Poppins, Open_Sans } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import { navConfig } from '@/config/navigation';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+// Configure Google Fonts
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-playfair',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+});
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-open-sans',
+});
 
 export const metadata: Metadata = {
   title: 'FoodExpress - Delicious Food Delivery & Takeaway',
@@ -18,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${playfair.variable} ${poppins.variable} ${openSans.variable} ${inter.variable}`}>
+      <body className={`font-sans antialiased`}>
         <Navbar
           companyName={navConfig.companyName}
           navItems={navConfig.navItems}

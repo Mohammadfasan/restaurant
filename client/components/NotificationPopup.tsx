@@ -1,4 +1,3 @@
-// components/NotificationPopup.tsx
 'use client';
 
 import { FaTimes, FaShoppingCart, FaTicketAlt, FaExclamationTriangle, FaInfoCircle } from 'react-icons/fa';
@@ -83,12 +82,12 @@ const NotificationPopup: React.FC<NotificationPopupProps> = ({ isOpen, onClose }
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-end pt-16"
+      className="fixed inset-0  z-50 flex items-start justify-end pt-16 border-b border-[#FF6347]  p-4"
       onClick={handleOverlayClick}
     >
       <div className="bg-white rounded-2xl w-full max-w-sm mx-4 mt-2 shadow-xl transform transition-all">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-[#FF6347]">
           <div>
             <h2 className="text-lg font-bold text-gray-800">Notifications</h2>
             <p className="text-sm text-gray-500">{notifications.filter(n => !n.isRead).length} unread</p>

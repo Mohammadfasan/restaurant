@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 'use client';
 
 import { useState } from 'react';
@@ -117,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center justify-center flex-1 max-w-2xl">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-3">
               {navItems.map((item) => (
                 <div key={item.id} className="relative">
                   {item.dropdown ? (
@@ -167,12 +166,8 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Right side icons and auth - Desktop */}
-          <div className="hidden lg:flex items-center space-x-3">
-            {/* Search Icon */}
-            <Link href="/search" className="p-2 hover:bg-orange-600 rounded-md transition-colors">
-              <FaSearch className="w-5 h-5" />
-            </Link>
-
+          <div className="hidden lg:flex items-center space-x-4">
+           
             {/* Notification Icon */}
             <button 
               onClick={handleNotificationClick}
@@ -420,7 +415,6 @@ const Navbar: React.FC<NavbarProps> = ({
         )}
       </div>
 
-      {/* Popup Components */}
       <NotificationPopup 
         isOpen={showNotifications} 
         onClose={handleCloseNotifications} 

@@ -1,4 +1,3 @@
-// components/SignInPopup.tsx
 'use client';
 
 import { useState } from 'react';
@@ -33,12 +32,12 @@ const SignInPopup: React.FC<SignInPopupProps> = ({ isOpen, onClose, onSwitchToSi
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-opacity-50 z-50 flex items-center justify-center p-10 "
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-2xl w-full max-w-md transform transition-all">
+      <div className="bg-white rounded-2xl w-full max-w-md transform transition-all border-b border-[#FF6347] hover:shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-[#FF6347]">
           <h2 className="text-2xl font-bold text-gray-800">Sign In</h2>
           <button
             onClick={onClose}
@@ -60,7 +59,7 @@ const SignInPopup: React.FC<SignInPopupProps> = ({ isOpen, onClose, onSwitchToSi
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-gray-900"
               placeholder="Enter your email"
               required
             />
@@ -77,7 +76,7 @@ const SignInPopup: React.FC<SignInPopupProps> = ({ isOpen, onClose, onSwitchToSi
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12 text-gray-900"
                 placeholder="Enter your password"
                 required
               />

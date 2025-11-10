@@ -1,4 +1,3 @@
-// components/SignUpPopup.tsx
 'use client';
 
 import { useState } from 'react';
@@ -46,12 +45,12 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0  z-50 flex items-center justify-center pt-35 border-b border-border-[#FF6347]"
       onClick={handleOverlayClick}
     >
       <div className="bg-white rounded-2xl w-full max-w-md transform transition-all max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
+        <div className="flex items-center justify-between p-6 border-b border-[#FF6347] sticky top-0 bg-white">
           <h2 className="text-2xl font-bold text-gray-800">Create Account</h2>
           <button
             onClick={onClose}
@@ -74,7 +73,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-black"
               placeholder="Enter your full name"
               required
             />
@@ -91,7 +90,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-black"
               placeholder="Enter your email"
               required
             />
@@ -108,7 +107,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-black"
               placeholder="Enter your phone number"
             />
           </div>
@@ -125,7 +124,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12 text-black"
                 placeholder="Create a password"
                 required
               />
@@ -151,7 +150,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12 text-black"
                 placeholder="Confirm your password"
                 required
               />
@@ -191,7 +190,7 @@ const SignUpPopup: React.FC<SignUpPopupProps> = ({ isOpen, onClose, onSwitchToSi
           <button
             type="submit"
             disabled={!agreeToTerms}
-            className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors mb-4"
+            className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-600  disabled:cursor-not-allowed transition-colors mb-4"
           >
             Create Account
           </button>
