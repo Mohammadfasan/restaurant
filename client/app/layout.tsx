@@ -4,6 +4,7 @@ import { Inter, Playfair_Display, Poppins, Open_Sans } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import { navConfig } from '@/config/navigation';
 import './globals.css';
+import Footer from '@/components/Footer';
 
 // Configure Google Fonts
 const inter = Inter({ 
@@ -47,7 +48,9 @@ export default function RootLayout({
           navItems={navConfig.navItems}
           className="sticky top-0 z-40"
         />
+        
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

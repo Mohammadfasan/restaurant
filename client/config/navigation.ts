@@ -10,83 +10,48 @@ export const navConfig = {
       href: '/',
     },
     {
-      id: 'menu',
-      label: 'Our Menu',
-      href: '/menu',
+      id: 'Pages',
+      label: 'Our Pages',
+      href: '/Pages',
       dropdown: [
         {
-          id: 'burgers',
-          label: 'Burgers & Sandwiches',
-          href: '/menu/burgers',
-          description: 'Juicy burgers & delicious sandwiches'
+          id: 'AboutUs',
+          label: 'About Us',
+          href: '/Pages/AboutUs',
+         
         },
         {
-          id: 'pizzas',
-          label: 'Pizzas',
-          href: '/menu/pizzas',
-          description: 'Freshly baked pizzas with various toppings'
+          id: 'Testimonials',
+          label: 'Testimonials',
+          href: '/Pages/Testimonials',
         },
         {
-          id: 'pasta',
-          label: 'Pasta & Noodles',
-          href: '/menu/pasta',
-          description: 'Italian & Asian pasta dishes'
+          id: 'faqs',
+          label: 'FAQs',
+          href: '/Pages/Faqs',
         },
         {
-          id: 'rice',
-          label: 'Rice Dishes',
-          href: '/menu/rice',
-          description: 'Biryani, Fried Rice & more'
-        },
-        {
-          id: 'appetizers',
-          label: 'Appetizers',
-          href: '/menu/appetizers',
-          description: 'Starters & snacks'
-        },
-        {
-          id: 'desserts',
-          label: 'Desserts',
-          href: '/menu/desserts',
-          description: 'Sweet treats & ice creams'
-        },
-        {
-          id: 'beverages',
-          label: 'Beverages',
-          href: '/menu/beverages',
-          description: 'Cold & hot drinks'
-        },
+          id: 'contact',
+          label: 'Contact Us',
+          href: '/Pages/Contact',
+        }
       ],
     },
     {
-      id: 'varieties',
-      label: 'Varieties',
-      href: '/varieties',
+      id: 'Menu',
+      label: 'Menu',
+      href: '/menu',
       dropdown: [
         {
-          id: 'veg',
-          label: 'Vegetarian Special',
-          href: '/varieties/veg',
-          description: 'Pure vegetarian delights'
+          id: 'Menu',
+          label: 'Menu',
+          href: '/menu',
         },
         {
-          id: 'non-veg',
-          label: 'Non-Vegetarian',
-          href: '/varieties/non-veg',
-          description: 'Chicken, Mutton & Seafood'
-        },
-        {
-          id: 'healthy',
-          label: 'Healthy Options',
-          href: '/varieties/healthy',
-          description: 'Low-calorie & diet food'
-        },
-        {
-          id: 'chef-special',
-          label: "Chef's Special",
-          href: '/varieties/chef-special',
-          description: 'Exclusive chef creations'
-        },
+          id: 'Menu-items',
+          label: 'Menu Items',
+          href: '/menu/menu-items',
+        }
       ],
     },
     {
