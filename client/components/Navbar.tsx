@@ -1,6 +1,7 @@
+// Navbar.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavbarProps } from '@/types/navbar';
@@ -20,6 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemsCount, setCartItemsCount] = useState(3);
   const [notificationCount, setNotificationCount] = useState(2);
+  const [isMounted, setIsMounted] = useState(false);
   
   // New state for popups
   const [showNotifications, setShowNotifications] = useState(false);
@@ -28,8 +30,26 @@ const Navbar: React.FC<NavbarProps> = ({
   
   const pathname = usePathname();
 
+  // Set mounted state to prevent hydration issues
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (activeDropdown !== null) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [activeDropdown]);
+
   // Notification handlers
-  const handleNotificationClick = () => {
+  const handleNotificationClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     setShowNotifications(true);
   };
 
@@ -38,7 +58,8 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   // Sign In handlers
-  const handleSignInClick = () => {
+  const handleSignInClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     setShowSignIn(true);
   };
 
@@ -52,7 +73,8 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   // Sign Up handlers
-  const handleSignUpClick = () => {
+  const handleSignUpClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     setShowSignUp(true);
   };
 
@@ -75,11 +97,14 @@ const Navbar: React.FC<NavbarProps> = ({
     setIsLoggedIn(false);
   };
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleDropdownToggle = (itemId: string) => {
+  const handleDropdownToggle = (itemId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setActiveDropdown(activeDropdown === itemId ? null : itemId);
   };
 
@@ -91,6 +116,35 @@ const Navbar: React.FC<NavbarProps> = ({
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
   };
+
+  // Don't render anything until mounted to prevent hydration mismatch
+  if (!isMounted) {
+    return (
+      <nav className={`bg-[#FF6347] text-white shadow-lg ${className}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Static logo for SSR */}
+            <div className="flex items-center">
+              <Link href="/" className="flex-shrink-0 flex items-center">
+                {logo ? (
+                  <img 
+                    className="h-10 w-10 mr-3" 
+                    src={logo} 
+                    alt={`${companyName} logo`}
+                  />
+                ) : (
+                  <div className="h-10 w-10 mr-3 bg-white rounded-full flex items-center justify-center">
+                    <span className="text-orange-500 font-bold text-lg">F</span>
+                  </div>
+                )}
+                <span className="font-bold text-xl sm:text-2xl">{companyName}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className={`bg-[#FF6347] text-white shadow-lg ${className}`}>
@@ -122,10 +176,11 @@ const Navbar: React.FC<NavbarProps> = ({
                   {item.dropdown ? (
                     <div className="relative">
                       <button
-                        onClick={() => handleDropdownToggle(item.id)}
+                        onClick={(e) => handleDropdownToggle(item.id, e)}
                         className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-600 transition-colors flex items-center ${
                           isActiveLink(item.href) ? 'bg-orange-700' : ''
                         }`}
+                        suppressHydrationWarning
                       >
                         {item.label}
                         <FaChevronDown className="ml-1 w-3 h-3" />
@@ -172,6 +227,7 @@ const Navbar: React.FC<NavbarProps> = ({
             <button 
               onClick={handleNotificationClick}
               className="relative p-2 hover:bg-orange-600 rounded-md transition-colors"
+              suppressHydrationWarning
             >
               <FaBell className="w-5 h-5" />
               {notificationCount > 0 && (
@@ -195,8 +251,9 @@ const Navbar: React.FC<NavbarProps> = ({
             {isLoggedIn ? (
               <div className="relative">
                 <button
-                  onClick={() => handleDropdownToggle('user')}
+                  onClick={(e) => handleDropdownToggle('user', e)}
                   className="flex items-center space-x-2 p-2 hover:bg-orange-600 rounded-md transition-colors"
+                  suppressHydrationWarning
                 >
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                     <FaUser className="text-orange-500 text-sm" />
@@ -214,6 +271,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 border-t border-gray-100"
+                      suppressHydrationWarning
                     >
                       Sign Out
                     </button>
@@ -225,12 +283,14 @@ const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={handleSignInClick}
                   className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-600 transition-colors"
+                  suppressHydrationWarning
                 >
                   Sign In
                 </button>
                 <button
                   onClick={handleSignUpClick}
                   className="px-3 py-2 rounded-md text-sm font-medium bg-white text-orange-500 hover:bg-gray-100 transition-colors"
+                  suppressHydrationWarning
                 >
                   Sign Up
                 </button>
@@ -260,6 +320,7 @@ const Navbar: React.FC<NavbarProps> = ({
               onClick={toggleMobileMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-orange-600 focus:outline-none transition-colors"
               aria-label="Main menu"
+              suppressHydrationWarning
             >
               {isMobileMenuOpen ? (
                 <FaTimes className="h-6 w-6" />
@@ -282,6 +343,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     <button
                       onClick={closeMobileMenu}
                       className="p-2 rounded-md hover:bg-orange-600 transition-colors"
+                      suppressHydrationWarning
                     >
                       <FaTimes className="h-5 w-5" />
                     </button>
@@ -294,8 +356,9 @@ const Navbar: React.FC<NavbarProps> = ({
                         {item.dropdown ? (
                           <div>
                             <button
-                              onClick={() => handleDropdownToggle(item.id)}
+                              onClick={(e) => handleDropdownToggle(item.id, e)}
                               className="w-full text-left px-3 py-4 rounded-md text-base font-medium hover:bg-orange-600 flex justify-between items-center transition-colors"
+                              suppressHydrationWarning
                             >
                               <span>{item.label}</span>
                               <FaChevronDown 
@@ -349,6 +412,7 @@ const Navbar: React.FC<NavbarProps> = ({
                           <button
                             onClick={handleNotificationClick}
                             className="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-orange-600 transition-colors flex items-center justify-between"
+                            suppressHydrationWarning
                           >
                             <span>Notifications</span>
                             {notificationCount > 0 && (
@@ -377,6 +441,7 @@ const Navbar: React.FC<NavbarProps> = ({
                               closeMobileMenu();
                             }}
                             className="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-orange-600 text-red-200 transition-colors"
+                            suppressHydrationWarning
                           >
                             Sign Out
                           </button>
@@ -387,20 +452,22 @@ const Navbar: React.FC<NavbarProps> = ({
                         <p className="px-3 py-2 text-orange-200">Welcome to FoodExpress!</p>
                         <div className="flex space-x-2">
                           <button
-                            onClick={() => {
-                              handleSignInClick();
+                            onClick={(e) => {
+                              handleSignInClick(e);
                               closeMobileMenu();
                             }}
                             className="flex-1 text-center px-4 py-3 rounded-md text-base font-medium hover:bg-orange-600 border border-orange-400 transition-colors"
+                            suppressHydrationWarning
                           >
                             Sign In
                           </button>
                           <button
-                            onClick={() => {
-                              handleSignUpClick();
+                            onClick={(e) => {
+                              handleSignUpClick(e);
                               closeMobileMenu();
                             }}
                             className="flex-1 text-center px-4 py-3 rounded-md text-base font-medium bg-white text-orange-600 hover:bg-gray-100 transition-colors"
+                            suppressHydrationWarning
                           >
                             Sign Up
                           </button>

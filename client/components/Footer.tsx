@@ -1,8 +1,6 @@
 // Footer.tsx - Footer Section for Foodexpress
 import React from 'react'
 
-// You can use a real logo import if you have one
-// import logo from '../public/asserts/logo.png' 
 
 const Footer = () => {
   return (

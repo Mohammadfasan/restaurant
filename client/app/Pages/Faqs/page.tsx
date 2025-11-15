@@ -1,8 +1,9 @@
-import React from 'react'
-
+import Faqs from '@/components/Faq'
 const FaQ = () => {
   return (
-    <div>Frequently Asked Questions</div>
+    <div>
+      <Faqs />
+    </div>
   )
 }
 

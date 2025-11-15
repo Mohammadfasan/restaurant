@@ -1,4 +1,3 @@
-// Hero.tsx - Enhanced with Better Typography
 import Image from 'next/image'
 import fruitsImage from '../public/asserts/fruits.png'
 
@@ -85,7 +84,7 @@ const Hero = () => {
                 alt="Delicious Fresh Food Platter"
                 width={700}
                 height={700}
-                className="max-w-full h-auto rounded-3xl shadow-2xl shadow-orange-500/20 transform transition duration-700 ease-in-out hover:scale-[1.02] rotate-1 border-2 border-orange-500/10"
+                className="max-w-full h-auto rounded-3xl  shadow-orange-500/20 transform transition duration-700 ease-in-out hover:scale-[1.02] rotate-1 "
                 priority
               />
               
